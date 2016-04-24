@@ -5,6 +5,9 @@ driver:
     cpus: '2'
     memory: '2048'
 
+transport:
+  name: sftp
+
 provisioner:
   name: puppet_apply
   manifests_path: puppet/manifests
@@ -24,6 +27,9 @@ platforms:
     driver:
       box: ubuntu1464-puppet
       box_url: https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-puppet/versions/1.0.1/providers/virtualbox.box
+      provision: true
+      vagrantfiles:
+        - aptupdate.rb
 
 suites:
   - name: default
@@ -32,7 +38,7 @@ suites:
       network:
         - ["private_network", {ip: "192.168.33.2"}]
       customize:
-        memory: 1024
+        memory: 2048
         cpus: 2
 
   - name: tlp
